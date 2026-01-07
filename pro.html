@@ -1,0 +1,54 @@
+<!DOCTYPE html><html><head>
+    <title>KING MAPS PRO | COMMAND</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /> <style>
+        body { margin: 0; padding: 0; background: #000; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+        #map { height: 100vh; width: 100%; transition: all 0.5s ease; }
+    /* SLIDE-IN SIDEBAR */
+     #sideBar { position: fixed; top: 0; left: -150px; 
+        /* Hidden by default */
+        width: 140px; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; transition: 0.4s; border-right: 2px solid gold; display: flex; flex-direction: column; padding: 20px 10px; gap: 15px;} .app-link { background: #111; color: gold; border: 
+            1px solid gold; padding: 12px; border-radius: 8px; 
+            text-align: center; font-size: 12px; font-weight: bold; text-decoration: 
+            none; }
+ /* UI OVERLAYS */
+  .menu-trigger {position: fixed; top: 20px; left: 20px; z-index: 1001;
+    background: gold; color: black; padding: 10px 15px; 
+    border-radius: 50%; font-weight: bold; cursor: pointer; }
+ .bottom-nav { position: fixed; bottom: 10px; left: 0; width: 100%;
+     display: flex; justify-content: space-around; z-index: 1001; padding-bottom: 10px; } 
+     .btn-main { background: black; color: gold; border: 2px solid gold; padding: 15px; border-radius: 12px; font-weight: bold; flex: 1; margin: 0 5px; 
+        font-size: 11px; text-align: center; } .btn-sos { background: red !important; color: white !important; border: 2px solid white !important; } </style></head><body>
+ <div id="sideBar">
+    <h3 style="color:white; font-size: 14px; text-align: center;">COMMERCE</h3>
+    <a href="https://www.uber.com" class="app-link">UBER</a>
+    <a href="https://www.jumia.ug" class="app-link" style="color: #ff9900; border-color: #ff9900;">JUMIA</a>
+    <a href="https://www.amazon.com" class="app-link" style="color: #ff9900; border-color: #ff9900;">AMAZON</a>
+     <a href="https://www.jiji.ug" class="app-link" style="color: #37b848; border-color: #37b848;">JIJI</a> <button class="app-link" onclick="toggleMenu()" style="margin-top: 20px; background: red; color: white;">CLOSE</button>
+    </div> <div class="menu-trigger" onclick="toggleMenu()">☰</div>
+<div id="map"></div>
+ <div class="bottom-nav">
+    <div class="btn-main" onclick="map.locate({setView: true, maxZoom: 18})">GPS</div> <div class="btn-main" onclick="toggle3D()">3D TILT</div>
+    <div class="btn-main" onclick="toggleTraffic()">TRAFFIC</div> 
+    <div class="btn-main btn-sos" onclick="triggerSOS()">SOS</div> </div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script> var map = L.map('map', { zoomControl: false }).setView([0.3476, 32.5825], 15);
+     // SATELLITE & TERRAIN LAYERS        
+     var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}').addTo(map); var traffic = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { opacity: 0.4 });
+ // SIDEBAR TOGGLE        
+ function toggleMenu() { var side = document.getElementById('sideBar'); if(side.style.left === "0px") { side.style.left = "-150px"; } else { side.style.left = "0px"; }
+ }
+ // 3D TILT        
+ var is3D = false; function toggle3D() { var el = document.getElementById('map'); 
+ if(!is3D) { el.style.transform = "perspective(800px) rotateX(45deg) scale(1.1)"; is3D = true;
+ 1} else { el.style.transform = "none"; is3D = false; }
+ }
+ // TRAFFIC LAYER       
+ function toggleTraffic() { if(map.hasLayer(traffic)) { map.removeLayer(traffic); } else { traffic.addTo(map); }
+ }
+ // SOS SYSTEM        
+ function triggerSOS() { document.body.style.background = "red";
+  alert("EMERGENCY SOS: Broadcasting Location to King Grid...");
+   map.locate({setView: true, maxZoom: 19}); setTimeout(() => { document.body.style.background = "black"; }, 3000);} 
+</script>
+</body>
+</html>

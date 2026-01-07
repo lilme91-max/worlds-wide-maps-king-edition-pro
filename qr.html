@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KING QR GENERATOR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body { background: #000; color: gold; font-family: sans-serif; text-align: center; padding: 20px; }
+        input { width: 80%; padding: 15px; border-radius: 10px; border: 2px solid gold; background: #111; color: white; margin-bottom: 20px; }
+        #qrcode { background: white; padding: 20px; display: inline-block; border-radius: 10px; margin-top: 20px; }
+        .btn { background: gold; color: black; padding: 15px 30px; border-radius: 10px; font-weight: bold; cursor: pointer; display: inline-block; }
+    </style>
+</head>
+<body>
+    <h1>KING QR TERMINAL</h1>
+    <p>Paste your GitHub Link below:</p>
+    <input type="text" id="urlInput" placeholder="https://lilme91-max.github.io/...">
+    <br>
+    <div class="btn" onclick="makeCode()">GENERATE QR</div>
+    <br>
+    <div id="qrcode"></div>
+
+    <script>
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            width : 256,
+            height : 256
+        });
+
+        function makeCode () {  
+            var elText = document.getElementById("urlInput");
+            if (!elText.value) { alert("Input a URL first, Founder"); return; }
+            qrcode.makeCode(elText.value);
+        }
+    </script>
+</body>
+</html>

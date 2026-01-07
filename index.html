@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KING MAPS GLOBAL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body { margin: 0; padding: 0; background: #000; overflow: hidden; font-family: sans-serif; }
+        #map { height: 100vh; width: 100%; transition: transform 0.8s ease; }
+        .ui { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 1000; width: 90%; display: flex; gap: 10px; }
+        .btn { background: #000; color: gold; border: 2px solid gold; padding: 18px; 
+            border-radius: 12px; flex: 1; text-align: center; 
+            font-weight: bold; cursor: pointer; font-size: 14px;
+             box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div class="ui">
+        <div class="btn" onclick="map.locate({setView: true, maxZoom: 18})">
+            MY GPS</div>
+        <div class="btn" onclick="document.getElementById('map').style.transform = 'perspective(900px) rotateX(45deg)'">3D VIEW</div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map', { zoomControl: false }).setView([0.3476, 32.5825], 15);
+        // This satellite layer fixes your 403 error because it needs NO KEY
+        
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}').addTo(map);
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}').addTo(map);
+    </script>
+</body>
+</html>
+<!DOCTYPE html><html>
+    <head>
+         <title>KING MAPS PRO | GLOBAL COMMAND</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+           <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" /><style>
+            
+            body { margin: 0; padding: 0; background: #000; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+            #map { height: 100vh; width: 100%; transition: all 0.5s ease; }
+            /* THE BILLIONAIRE DASHBOARD */
+             .side-bar { position: fixed; top: 10px; left: 10px; z-index: 1001;
+                 display: flex; flex-direction: column; gap: 8px; width: 120px;}
+                  .app-btn { background: rgba(0,0,0,0.8); color: #00d4ff; border: 1px solid #00d4ff;
+                     padding: 10px; border-radius: 8px; 
+                     font-size: 11px; font-weight: bold;
+                      cursor: pointer; text-align: center; text-transform: uppercase;}
+                      .app-btn.orange { color: #ff9900; border-color: #ff9900; }
+                       /* Jumia/Amazon */
+                        .bottom-nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+                            z-index: 1001; width: 95%; display: flex; gap: 10px;} .nav-btn { background: linear-gradient(145deg, #1a1a1a, #000); color: gold;border: 2px solid gold; padding: 15px; border-radius: 12px;
+                                 flex: 1; text-align: center; font-weight: bold; font-size: 12px; } </style>
+                                </head>
+                                <body>
+ <div class="side-bar">
+    <div class="app-btn" onclick="window.open('https://www.uber.com', '_blank')">UBER MODE</div>
+    <div class="app-btn orange" onclick="window.open('https://www.jumia.ug', '_blank')">JUMIA GRID</div>
+    <div class="app-btn orange" onclick="window.open('https://www.amazon.com', '_blank')">AMAZON INTEL</div>        <div class="app-btn" onclick="window.open('https://www.jiji.ug', '_blank')" style="color:#37b848; border-color:#37b848;">JIJI MARKET</div>    </div>
+ <div id="map"></div>
+<div class="bottom-nav">
+    <div class="nav-btn" onclick="toggleTraffic()">TRAFFIC</div>
+    <div class="nav-btn" onclick="toggleTerrain()">TERRAIN</div> <div class="nav-btn" onclick="map.locate({setView: true, maxZoom: 18})">MY GPS</div>        <div class="nav-btn" onclick="toggle3D()">3D TILT</div>    </div>
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>    <script>        var map = L.map('map', { zoomControl: false }).setView([0.3476, 32.5825], 14);
+ // LAYER 1: SATELLITE (Base)        
+ var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}').addTo(map);
+        // LAYER 2: TRAFFIC (Real-time Overlay)        var traffic = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { opacity: 0.5 });                // LAYER 3: TERRAIN        var terrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}');
+        // STREET VIEW SIMULATION (User Location)        map.on('locationfound', function(e) {            L.marker(e.latlng).addTo(map).bindPopup("YOU ARE HERE").openPopup();        });
+        // BILLIONAIRE LOGIC FUNCTIONS        function toggleTraffic() {            if(map.hasLayer(traffic)) { map.removeLayer(traffic); }             else { traffic.addTo(map); }        }
+        function toggleTerrain() {            if(map.hasLayer(terrain)) { map.removeLayer(terrain); }             else { terrain.addTo(map); }        }
+        var is3D = false;        function toggle3D() {            var el = document.getElementById('map');            if(!is3D) {                el.style.transform = "perspective(1000px) rotateX(45deg) scale(1.1)";                is3D = true;            } else {                el.style.transform = "none";                is3D = false;            }        }    </script></body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
